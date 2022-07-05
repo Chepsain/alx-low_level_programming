@@ -19,7 +19,7 @@ int main(void)
 
 	sum = 0;
 
-	for (i = 1, i <= 33; ++i)
+	for (i = 1; i <= 33; ++i)
 	{
 		if (j < 40000 && (j % 2) == 0)
 		{
