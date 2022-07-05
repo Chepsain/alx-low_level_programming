@@ -6,7 +6,7 @@
  * @n: number of the times table
  */
 
-void print_to_98(int n);
+void print_to_98(int n)
 {
 int num, mult, prod;
 if (n >= 0 && n <= 15)
