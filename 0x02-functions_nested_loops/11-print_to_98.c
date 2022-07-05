@@ -2,11 +2,11 @@
 
 
 /**
- * print_times_table - prints the n times table, starting with 0
+ * print_to_98 - prints the n times table, starting with 0
  * @n: number of the times table
  */
 
-void print_times_table(int n)
+void print_to_98(int n);
 {
 int num, mult, prod;
 if (n >= 0 && n <= 15)
