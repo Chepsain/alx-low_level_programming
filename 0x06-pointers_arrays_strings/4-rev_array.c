@@ -1,28 +1,23 @@
 #include "main.h"
 
 /**
- * _strncpy - copies n bytes of src to the dest string
- * @dest: string to copy to
- * @src: string being copied
- * @n: largest number of bytes to copy
+ * reverse_array - reverses the contents of an array
+ * @a: integer array to be reversed
+ * @n: length of array a
  *
- * Return: addres of dest
+ * Return: void
  */
-
-char *_strncpy(char *dest, char *src, int n)
+void reverse_array(int *a, int n)
 {
-	int i;
+	int i = 0, t;
 
-	i = 0;
-	while (i < n && *(src + i))
-	{
-		*(dest + i) = *(src + i);
-		i++;
-	}
+	n = n - 1;
 	while (i < n)
 	{
-		*(dest + i) = '\0';
+		t = *(a + i);
+		*(a + i) = *(a + n);
+		*(a + n) = t;
 		i++;
+		n--;
 	}
-	return (dest);
 }
