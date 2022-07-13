@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 #include "main.h"
@@ -23,3 +24,6 @@ void print_number(int n)
 	_putchar((num % 10) + '0');
 }
 >>>>>>> b3fb0ab7bab1d87be19c9c423f64c9787dc30995
+=======
+
+>>>>>>> 1c46bfd8ec04eed190233cfb94130b02b7d713e7
