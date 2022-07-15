@@ -1,5 +1,9 @@
 #include <stdio.h>
-
+/**
+* main - prints 98\n
+*
+* Return: Always 0 (succes)
+*/
 int main(void)
 {
 int n;
