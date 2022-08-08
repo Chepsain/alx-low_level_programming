@@ -60,7 +60,3 @@
 * **print_hex.c:** - contains the functions ```print_hex```, which prints an unsigned int in hexidecimal form, ```print_x```, ```print_X```, and ```print_p```, which handle the conversion specifiers ```x```, ```X```, and ```p```, respectively
 * **print_unsigned_int.c:** - contains the functions ```print_u```, ```print_o```, and ```print_b```, which handle the conversion specifiers ```u```, ```o```, and ```b```, respectively
 * **print_rot13.c** - contains the function ```print_R```, which handles the conversion specifier ```R```
-## Authors
-[Alexa Orrico](https://github.com/alexaorrico) | [@alexa_orrico](https://twitter.com/alexa_orrico)
-
-[Daniel Ojeda](https://github.com/Danielo814) | [@DanielC_Ojeda](https://twitter.com/DanielC_Ojeda)
