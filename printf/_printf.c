@@ -1,82 +1,92 @@
-#include "main.h"
+#include "holberton.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
- * check_for_specifiers - checks if there is a valid format specifier
- * @format: possible format specifier
- *
- * Return: pointer to valid function or NULL
+ * printIdentifiers - prints special characters
+ * @next: character after the %
+ * @arg: argument for the indentifier
+ * Return: the number of characters printed
+ * (excluding the null byte used to end output to strings)
  */
-static int (*check_for_specifiers(const char *format))(va_list)
+
+int printIdentifiers(char next, va_list arg)
 {
-	unsigned int i;
-	print_t p[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"i", print_i},
-		{"d", print_d},
-		{"u", print_u},
-		{"b", print_b},
-		{"o", print_o},
-		{"x", print_x},
-		{"X", print_X},
-		{"p", print_p},
-		{"S", print_S},
-		{"r", print_r},
-		{"R", print_R},
+	int functsIndex;
+
+	identifierStruct functs[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"d", print_int},
+		{"i", print_int},
+		{"u", print_unsigned},
+		{"b", print_unsignedToBinary},
+		{"o", print_oct},
+		{"x", print_hex},
+		{"X", print_HEX},
+		{"S", print_STR},
 		{NULL, NULL}
 	};
 
-	for (i = 0; p[i].t != NULL; i++)
+	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
 	{
-		if (*(p[i].t) == *format)
-		{
-			break;
-		}
+		if (functs[functsIndex].indentifier[0] == next)
+			return (functs[functsIndex].printer(arg));
 	}
-	return (p[i].f);
+	return (0);
 }
 
 /**
- * _printf - prints anything
- * @format: list of argument types passed to the function
+ * _printf - mimic printf from stdio
+ * Description: produces output according to a format
+ * write output to stdout, the standard output stream
+ * @format: character string composed of zero or more directives
  *
- * Return: number of characters printed
+ * Return: the number of characters printed
+ * (excluding the null byte used to end output to strings)
+ * return -1 for incomplete identifier error
  */
+
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0, count = 0;
-	va_list valist;
-	int (*f)(va_list);
+	unsigned int i;
+	int identifierPrinted = 0, charPrinted = 0;
+	va_list arg;
 
+	va_start(arg, format);
 	if (format == NULL)
 		return (-1);
-	va_start(valist, format);
-	while (format[i])
+
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		for (; format[i] != '%' && format[i]; i++)
+		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			count++;
-		}
-		if (!format[i])
-			return (count);
-		f = check_for_specifiers(&format[i + 1]);
-		if (f != NULL)
-		{
-			count += f(valist);
-			i += 2;
+			charPrinted++;
 			continue;
 		}
-		if (!format[i + 1])
-			return (-1);
-		_putchar(format[i]);
-		count++;
 		if (format[i + 1] == '%')
-			i += 2;
-		else
+		{
+			_putchar('%');
+			charPrinted++;
 			i++;
+			continue;
+		}
+		if (format[i + 1] == '\0')
+			return (-1);
+
+		identifierPrinted = printIdentifiers(format[i + 1], arg);
+		if (identifierPrinted == -1 || identifierPrinted != 0)
+			i++;
+		if (identifierPrinted > 0)
+			charPrinted += identifierPrinted;
+
+		if (identifierPrinted == 0)
+		{
+			_putchar('%');
+			charPrinted++;
+		}
 	}
-	va_end(valist);
-	return (count);
+	va_end(arg);
+	return (charPrinted);
 }
